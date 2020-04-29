@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cards
+  labels:
+    app: cards
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cards
+  template:
+    metadata:
+      labels:
+        app: cards
+    spec:
+      containers:
+      - name: cards
+        image: darrenjones/cards-against-humanity:latest
+        ports:
+        - containerPort: 8080
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cards-service
+spec:
+  selector:
+    app: cards
+  ports:
+    - port: 8080 # Default port for image
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cards-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: cards.k8s.djns.io 
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: cards-service
+            servicePort: 8080
