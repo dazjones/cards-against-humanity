@@ -1,0 +1,154 @@
+@import 'https://fonts.googleapis.com/css?family=Droid+Sans+Mono';
+
+body{
+  background-color:black;
+  color: #FFF;
+  font-family: Helvetica,sans-serif;
+}
+
+.cardContainer{
+  overflow:hidden;
+  margin-left:10%;
+}
+
+.card{
+  /* Card Sizing */
+  width: 2.5in;
+  height: 4in;
+  border-radius: .25in;
+  
+  /* Display Properties */
+  float: left;
+  margin: 10px;
+  position: relative;
+}
+
+.dark{
+  /* Color information */
+  border: 3px solid white;
+  color: white;
+  background: black;
+}
+
+.light{
+  /* Color information */
+  border: 3px solid black;
+  color: black;
+  background: white;
+}
+
+.text{
+  /*font information*/
+  font-family: Helvetica,sans-serif;
+  font-weight: bolder;
+  font-size: 26px;
+  padding-left:7%;
+  padding-right:7%;
+  word-wrap: break-word;
+}
+
+.subtext{
+  /*font information*/
+  font-family: Helvetica,sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  padding-left:7%;
+  padding-right:7%;
+  word-wrap: break-word;
+}
+
+.header {
+  background: #FFF;
+  padding: 20px;
+}
+
+.header h1 {
+  color: #000;
+  font-size: 26px;
+  line-height: 1em;
+  padding: 0;
+  margin: 0;
+}
+.header #new-game {
+  background: #000;
+  border: 3px solid #000;
+  color: #FFF;
+  font-size: 26px;
+  padding: 7px 30px;
+  float: right;
+  line-height: 1em;
+  margin: -7px 0 0 0;
+  border-radius: .25in;
+  text-decoration: none;
+}
+.header #start-game {
+  background: #fff;
+  border: 3px solid #000;
+  color: #000;
+  font-size: 26px;
+  padding: 7px 30px;
+  float: right;
+  line-height: 1em;
+  margin: -7px 7px 0 0;
+  border-radius: .25in;
+  text-decoration: none;
+}
+.container {
+  padding: 20px;
+}
+.card-signup input {
+  background: none;
+  border: none;
+  color: #FFF;
+  outline: none;
+  padding: 0 0 7px 0;
+  border-bottom: solid 3px white;
+  width: 100%;
+}
+#czar {
+  width: 100%;
+  display: block;
+  padding: 14px 0;
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-size: 26px;
+  font-weight: bolder;
+  border-bottom: 3px solid #FFF;
+}
+
+.card a.play,
+.card a.award {
+  text-align: center;
+  background: #000;
+  color: #fff;
+  border-radius: .25in;
+  text-decoration: none;
+  padding: 7px 50px;
+  font-size: 26px;
+  position: absolute;
+  bottom: 15px; 
+  left: 40px;
+  display: none;
+}
+.card a.award {display: block;}
+.card:hover a.play {
+  display: block;
+}
+
+.card.card-played {
+  opacity: 0.4;
+}
+
+#score {
+  border-radius: .25in;
+  border: 3px solid white;
+  padding: 20px;
+  font-size: 20px;
+  margin-top: 40px;
+}
+#score thead {
+  font-weight: bolder;
+}
+#score table td {
+  padding: 5px 10px;
+}

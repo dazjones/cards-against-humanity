@@ -1,0 +1,59 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/game.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  <div class="header">
+    <a href="#" id="new-game">New Game</a>
+    <a href="#" id="start-game">Start Game</a>
+    <h1>Cards Against Humanity</h1>
+  </div>
+
+  <div id="czar" style="display: none;"></div>
+
+  <div class="container">
+    <div id="lobby" style="display: none;">
+      <div id="players"></div>
+      <form id="add-player">
+        <div class="card dark card-signup"><p class="text">Hello.<br /><br />My name is <br /><input id="name" name="name" type="text" /></p></div>  
+      </form>
+      
+    </div>
+    <div id="play-area">
+      <div id="dark-card"></div>
+      <div id="cards"></div>
+      <div style="clear: both"></div>
+      <div id="score">
+        <table>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Points</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="//code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
