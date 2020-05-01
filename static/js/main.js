@@ -3,6 +3,8 @@
     this.GameData = {};
     this.GameAlreadyInProgressBool = false;
     this.PlayerIndex = -1;
+    this.CardsPlayed = 0;
+    this.CardsToBePlayed = 1;
 
     $("#play-area").hide();
 
@@ -11,8 +13,9 @@
       $("#debug").text(data);
     },
     this.PollGame = function() {
-      $this = this;
+      window.g = this;
       window.setInterval(function () {
+        $this = window.g;
         $.getJSON( "/api/game", function( data ) {
           $this.GameData = data;
           $("#score tbody").empty()
@@ -36,6 +39,9 @@
           
         });
       }, 1000)
+    },
+    this.GetPlayerId = function () {
+        return localStorage.getItem("player-id")
     },
     this.New = function () {
       $this = this;
@@ -62,12 +68,18 @@
     },
     this.RenderCards = function () {
       $this = this;
+      $this.CardsToBePlayed = 1;
 
       darkCardText = $this.GameData.BlackCard.Text
       darkCard = $('<div class="card dark"><p class="text">' + darkCardText + '</p></div>');
       $("#dark-card").empty().append(darkCard);
 
-
+      var count = (darkCardText.match(/________/g) || []).length;
+      
+      if (count > 1) {
+        $this.CardsToBePlayed = count;
+      }
+    
       for (var i in $this.GameData.Players) {
         player = $this.GameData.Players[i];
         if (player.Id == localStorage.getItem("player-id")) {
@@ -87,8 +99,19 @@
             for (var i in $this.GameData.CardsInPlay) {
               text = $this.GameData.CardsInPlay[i].Card.Text;
               id = $this.GameData.CardsInPlay[i].Card.Id;
-              card = $('<div class="card light"><p class="text">' + text + '</p><a href="#" data-payload="?card=' + id + '" class="award">Award</a></div>');
-              $("#cards").append(card);
+              player = $this.GameData.CardsInPlay[i].Player.Id
+              wrapper = $(".cardstack#player-" + player)
+
+              if (wrapper.length == 0) {
+                wrapper = $('<div class="cardstack" id="player-'+ player + '"></div>');
+              }
+
+              card = $('<div class="card light stackcard" data-player="'+ player +'"><p class="text">' + text + '</p><a href="#" data-payload="?card=' + id + '" class="award">Award</a></div>');
+              if (wrapper.find(".card").length) {
+                card.find("a").remove();
+              }
+              wrapper.append(card);
+              $("#cards").append(wrapper);
             }
         }, 2000);
       } else {
@@ -183,6 +206,12 @@
 
     $.getJSON( "/api/game/cards/play" + d, function( data ) {
       $($this).parent().addClass("card-played")
+      
+      game.CardsPlayed++;
+
+      if (game.CardsPlayed == game.CardsToBePlayed) {
+        $("#cards .card.light a").remove();
+      }
       $this.remove();
     });
   })
